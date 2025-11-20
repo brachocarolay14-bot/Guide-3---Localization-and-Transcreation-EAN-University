@@ -59,6 +59,7 @@ body {
     font-size: 1.1em;
     letter-spacing: 0.1em;
     margin-right: 30px;
+    display: flex; /* Añadido para alinear los logos */
 }
 
 .riot-logo-icon {
@@ -66,10 +67,22 @@ body {
     margin-right: 5px;
 }
 
+.riot-logo-icon img {
+    height: 25px; /* Altura deseada para el logo */
+    width: auto; /* El ancho se ajustará automáticamente */
+    vertical-align: middle; /* Alinea la imagen verticalmente con el texto */
+}
+
 .wild-rift-icon {
     font-size: 1.2em;
     margin-left: 10px;
     color: var(--text-accent);
+}
+
+.wild-rift-icon img {
+    height: 40px; /* Altura deseada para el logo de Wild Rift */
+    width: auto; /* El ancho se ajustará automáticamente */
+    vertical-align: middle; /* Alinea la imagen verticalmente con el texto */
 }
 
 .main-nav ul {
@@ -207,6 +220,16 @@ body {
     position: relative;
     background-color: var(--news-background); 
     overflow: hidden;
+}
+.news-hero-section img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    opacity: 0.3; /* Hacemos la imagen un poco transparente para que el título resalte */
 }
 
 .news-title-container {
