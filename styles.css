@@ -1,0 +1,1430 @@
+/* --- VARIABLES Y RESET BÁSICO --- */
+:root {
+    --riot-dark: #121212; /* Color de fondo muy oscuro */
+    --riot-blue: #007bff; /* Un azul genérico para el enlace */
+    --text-light: #ffffff;
+    --text-faded: rgba(255, 255, 255, 0.7);
+    --text-accent: #00f0ff; /* Similar al azul brillante de la imagen */
+    --news-background: #1a2333; /* Azul oscuro del fondo de la sección NEWS */
+    --sign-in-bg: #3c3c3c; /* Color del botón SIGN IN */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif; /* Fuente genérica */
+}
+
+body {
+    background-color: var(--riot-dark);
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+/* --- 1. BARRA DE NAVEGACIÓN (HEADER) --- */
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px 10px 40px;
+    background-color: var(--riot-dark); /* Color negro sólido para el header */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: padding 0.3s ease, background-color 0.3s ease; /* Transición suave */
+}
+
+/* Estilos para la barra de navegación cuando se hace scroll */
+.navbar.scrolled {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: #1a1a1a; /* Un fondo ligeramente más sólido */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.navbar-left, .main-nav ul {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    color: var(--text-light);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1em;
+    letter-spacing: 0.1em;
+    margin-right: 30px;
+}
+
+.riot-logo-icon {
+    font-size: 1.2em;
+    margin-right: 5px;
+}
+
+.wild-rift-icon {
+    font-size: 1.2em;
+    margin-left: 10px;
+    color: var(--text-accent);
+}
+
+.main-nav ul {
+    list-style: none;
+    gap: 30px;
+}
+
+.main-nav a {
+    color: var(--text-faded);
+    text-decoration: none;
+    font-size: 0.85em;
+    font-weight: 700;
+    transition: color 0.3s;
+    letter-spacing: 0.1em;
+}
+
+.main-nav a:hover,
+.support-link:hover,
+.social-link:hover,
+.main-nav .active-nav {
+    color: var(--text-light);
+    border-bottom: 2px solid var(--text-light);
+    padding-bottom: 2px;
+}
+
+.main-nav span,
+.support-link span,
+.social-link span {
+    font-size: 0.7em;
+    margin-left: 5px;
+    vertical-align: top;
+}
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.support-link, .social-link {
+    color: var(--text-faded);
+    text-decoration: none;
+    font-size: 0.85em;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+}
+
+/* Contenedor del ícono de menú y botón SIGN IN */
+.sign-in-button-container {
+    display: flex;
+    align-items: center;
+    background-color: var(--sign-in-bg);
+    border-radius: 4px;
+    padding: 5px 10px;
+    margin-left: 20px;
+}
+
+.menu-icon {
+    font-size: 1.2em;
+    margin-right: 10px;
+    cursor: pointer;
+    color: var(--text-faded);
+}
+
+.sign-in-button {
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 0.85em;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+}
+
+/* --- 2. SECCIÓN HERO (CONTENIDO PRINCIPAL) --- */
+
+.hero-section {
+    position: relative;
+    width: 100%;
+    height: 100vh; 
+    overflow: hidden;
+    padding-top: 60px;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Fondo con imagen y degradado superpuesto */
+    background: linear-gradient(135deg, rgba(30, 0, 80, 0.6), rgba(0, 10, 30, 0.6)), url('https://images.contentstack.io/v3/assets/blt370612131b6e0756/blt6149572f020f123c/63880175a89a530e669a2853/WR_AOV_S7_Jinx_Desktop-min.jpg'); 
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: multiply; 
+    z-index: 1;
+}
+
+.hero-content {
+    position: absolute;
+    bottom: 10%;
+    left: 10%;
+    max-width: 500px;
+    z-index: 2;
+}
+
+.hero-title {
+    font-size: 4em;
+    font-weight: 900;
+    line-height: 0.9;
+    margin-bottom: 20px;
+    color: var(--text-light);
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+}
+
+.hero-title br {
+    display: block;
+}
+
+.hero-text {
+    font-size: 1em;
+    color: var(--text-faded);
+    line-height: 1.5;
+}
+
+.hero-text strong {
+    color: var(--text-accent);
+    font-weight: 700;
+}
+
+/* --- HERO DE LA PÁGINA DE NOTICIAS --- */
+
+.news-hero-section {
+    padding-top: 60px; /* Espacio para la navbar */
+    height: 35vh; 
+    position: relative;
+    background-color: var(--news-background); 
+    overflow: hidden;
+}
+
+.news-title-container {
+    position: absolute;
+    bottom: 10%; /* Posiciona el texto cerca de la parte inferior */
+    left: 10%;
+    z-index: 2;
+}
+
+.news-title {
+    font-size: 5em;
+    font-weight: 900;
+    line-height: 0.9;
+    color: var(--text-light);
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+    /* El estilo inclinado de los títulos de Riot */
+    transform: skewX(-10deg); 
+    letter-spacing: 0.05em;
+}
+
+/* --- 3. SECCIÓN OBJETIVO DEL JUEGO --- */
+
+.objective-section {
+    background: linear-gradient(to bottom, #007bff, #0056b3);
+    padding: 60px 40px;
+    text-align: center;
+    color: var(--text-light);
+}
+
+.section-title {
+    font-size: 2.5em;
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    margin-bottom: 40px;
+    text-shadow: 2px 2px 0 rgba(255, 255, 255, 0.2), 
+                 -2px -2px 0 rgba(0, 0, 0, 0.4); 
+}
+
+.slider-container {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.slider-viewport {
+    overflow: hidden; /* La clave para el slider: oculta lo que no cabe */
+}
+
+.cards-container {
+    display: flex;
+    /* quitamos justify-content para que las tarjetas empiecen desde la izquierda */
+    gap: 30px;
+    width: calc(350px * 4 + 30px * 3); /* Ancho total para que quepan todas */
+    transition: transform 0.5s ease-in-out; /* Animación suave del deslizamiento */
+}
+
+.game-card {
+    flex-shrink: 0; /* Evita que las tarjetas se encojan */
+    width: 350px; /* Devolvemos un ancho fijo y más grande */
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+    max-width: none; /* Sobrescribimos el max-width anterior */
+}
+
+.card-image {
+    width: 100%;
+    height: 350px;
+    background-size: cover;
+    background-position: center top;
+}
+
+/* Colores placeholder para imágenes */
+.image-one { background-image: url('https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/250c7d07e647be74dc29a7f21ef674ac8e8f4bff-843x1124.png?auto=format&fit=crop&q=80&h=551&w=413&crop=center'); }
+.image-two { background-image: url('https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/bb379780738bcf23686d51e5e9cc4487ffd1d469-843x1124.png?auto=format&fit=crop&q=80&h=551&w=413&crop=center'); }
+.image-three { background-image: url('https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/dedd8f84ab50d09703528007d4d172aedf2cc25e-843x1124.png?auto=format&fit=crop&q=80&h=551&w=413&crop=center'); }
+.image-four { background-image: url('https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/7ad608f4da35b98d6947092e4fcd7c9f1fc697ec-844x1124.png?auto=format&fit=crop&q=80&h=551&w=413&crop=center'); }
+
+.game-card h3 {
+    margin: 20px 0 10px;
+    font-size: 1.2em;
+    font-weight: 700;
+}
+
+.game-card p {
+    padding: 0 15px 20px;
+    font-size: 0.95em;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.source-link {
+    margin-top: 40px;
+    font-size: 0.7em;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Estilos para la flecha del slider */
+.slide-arrow {
+    position: absolute;
+    bottom: -60px; /* Posición debajo de las tarjetas */
+    left: 50%;
+    transform: translateX(-50%); /* Centra la flecha (sin rotación) */
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+    border: 2px solid white;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.slide-arrow:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+/* --- 4. SECCIÓN CAMPEONES --- */
+
+.champions-section {
+    position: relative;
+    background-color: var(--text-light);
+    color: var(--riot-dark);
+    padding: 100px 40px; /* Padding uniforme para un mejor espaciado */
+    display: flex;
+    justify-content: center; /* Vuelve a centrar el contenido horizontalmente */
+    align-items: center; /* Centra verticalmente el contenido */
+}
+
+.content-wrapper {
+    display: flex;
+    justify-content: center; /* Centra las columnas */
+    align-items: center; /* Alinea verticalmente las columnas */
+    max-width: 1200px; /* Reducimos un poco para que no sea tan ancho */
+    width: 100%;
+    z-index: 5;
+}
+
+/* Decoraciones de Fondo */
+.left-sidebar-decoration {
+     /* La posicionamos de forma absoluta para que no afecte el centrado */
+    top: 0;
+    left: 0;
+    width: 100px;
+    height: 100%;
+    background-color: #1a2333;
+    z-index: 1;
+}
+
+.top-left-decoration {
+    position: absolute;
+    top: 0;
+    left: 100px;
+    width: 300px;
+    height: 100px;
+    clip-path: polygon(0 0, 100% 0, 80% 100%, 0% 100%); 
+    z-index: 2;
+}
+
+/* Columna Izquierda (Intro) */
+.champions-intro {
+    text-align: center;
+    max-width: 500px; /* Aumentamos el ancho para mejor balance */
+    padding-right: 50px; /* Añadimos espacio entre las columnas */
+}
+
+.champions-title {
+    font-size: 3em;
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    margin-bottom: 10px;
+    transform: skewX(-10deg);
+}
+
+.champions-subtitle {
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 30px;
+    line-height: 1.4;
+    padding: 0 40px;
+}
+
+.learn-more-button {
+    display: inline-block;
+    background-color: #1a2333;
+    color: var(--text-light);
+    text-decoration: none;
+    padding: 12px 30px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    font-size: 0.9em;
+    border-radius: 4px;
+    margin-bottom: 40px;
+    transition: background-color 0.3s;
+}
+
+.learn-more-button:hover {
+    background-color: #0d121b;
+}
+
+/* Fila de Íconos */
+.champion-icons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding-left: 20px;
+}
+
+.icon-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    cursor: pointer;
+    background-color: #ccc;
+    transition: transform 0.3s, border-color 0.3s;
+}
+
+.icon-circle.active {
+    border-color: #00f0ff; /* Borde azul para el ícono activo */
+    transform: scale(1.1); /* Hacer el ícono activo un poco más grande */
+}
+
+.icon-jinx {
+    background-image: url('https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/91347ca2734fa5140b15d1e5cd2123052512d5bc-192x192.png?auto=format&fit=crop&q=80&h=120&w=120&crop=center');
+    background-size: cover;
+    background-position: center;
+}
+
+.icon-lux {
+    background-image: url('https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/3afbfeead4ad3fd01dcc3f48a2bb1cbfdbef324c-192x192.png?auto=format&fit=crop&q=80&h=120&w=120&crop=center');
+    background-size: cover;
+    background-position: center;
+}
+
+.icon-zed {
+    background-image: url('https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/30f382e038287955a3fe8256129e2cd383be6d4d-192x192.png?auto=format&fit=crop&q=80&h=120&w=120&crop=center');
+    background-size: cover;
+    background-position: center;
+}
+
+.icon-fortune {
+    background-image: url('https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/a19c1e28ee10cd4cd3d0ab460007c20a35355333-192x192.png?auto=format&fit=crop&q=80&h=120&w=120&crop=center');
+    background-size: cover;
+    background-position: center;
+}
+
+.icon-blitz {
+    background-image: url('https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/29ede39c1e9ada514a390810dd03a4f0ff6209bd-192x192.png?auto=format&fit=crop&q=80&h=120&w=120&crop=center');
+    background-size: cover;
+    background-position: center;
+}
+
+/* Columna Derecha (Jinx Destacada) */
+.featured-champion {
+    max-width: 500px;
+    text-align: center;
+    padding-top: 40px;
+}
+
+.champion-image-container {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    margin: 0 auto 40px;
+}
+
+.champion-image-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 3px solid #00f0ff;
+    border-radius: 50%;
+    z-index: 1; 
+}
+
+.champion-image {
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    width: 110%; 
+    height: 110%;
+    background-image: url('https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/3f125399003cfa89c8599c3376a83fc21c4108de-1660x1628.png?auto=format&fit=fill&q=80&w=512');
+    background-size: cover;
+    background-position: center;
+    clip-path: circle(50% at 50% 50%); /* Recorte circular para la imagen */
+    z-index: 2;
+}
+
+.champion-details .name {
+    font-size: 1.5em;
+    font-weight: 900;
+    margin: 10px 0 5px;
+}
+
+.champion-details .tagline {
+    font-size: 0.8em;
+    font-weight: 700;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.champion-details .description {
+    font-size: 0.9em;
+    color: #555;
+    line-height: 1.5;
+    padding: 0 40px;
+}
+
+/* --- 5. SECCIÓN ROLES --- */
+
+.controls-section {
+    position: relative;
+    color: var(--text-light);
+    padding: 150px 40px;
+    text-align: center;
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.controls-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://images.contentstack.io/v3/assets/blt370612131b6e0756/blt848c4144c8ad2b44/603463101505753c6c4d73f5/wild-rift-controls-and-abilities-background.jpg');
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.6); /* Oscurece la imagen para que el texto resalte */
+    z-index: 1;
+}
+
+.controls-content-wrapper {
+    position: relative;
+    z-index: 2;
+}
+
+.controls-title {
+    font-size: 2.5em;
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    margin-bottom: 15px;
+    color: var(--text-light);
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+.controls-subtitle {
+    font-size: 1.1em;
+    color: var(--text-faded);
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+
+/* --- 6. PIE DE PÁGINA (FOOTER) --- */
+
+.main-footer {
+    background-color: var(--riot-dark);
+    color: var(--text-faded);
+    padding: 40px 40px 20px;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-content-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer-logo {
+    margin-bottom: 20px;
+}
+
+.logo-link {
+    color: var(--text-faded);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1em;
+    letter-spacing: 0.1em;
+    transition: color 0.3s;
+}
+
+.logo-link:hover {
+    color: var(--text-light);
+}
+
+.footer-links ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.footer-links a {
+    color: var(--text-faded);
+    text-decoration: none;
+    font-size: 0.8em;
+    font-weight: 400;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: var(--text-light);
+}
+
+.rating-info {
+    margin-bottom: 20px;
+}
+
+.rating-info p {
+    font-size: 0.7em;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.copyright p {
+    font-size: 0.7em;
+    color: rgba(255, 255, 255, 0.5);
+    margin-top: 10px;
+}
+/* --- SECCIÓN CONTROLES Y HABILIDADES --- */
+
+.controls-abilities-section {
+    position: relative;
+    background-color: #f7931e; /* Cambiado a fondo naranja */
+    padding: 100px 40px;
+    overflow: hidden;
+}
+
+.controls-abilities-section::before {
+    display: none; /* Ocultamos la imagen de fondo anterior */
+}
+.top-decoration-orange {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px; /* Altura de la sección curvada */
+    display: none; /* Ocultamos la decoración */
+}
+
+.abilities-content-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Centra verticalmente las columnas */
+    gap: 80px; /* Aumentamos el espacio entre columnas */
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+/* Columna de Texto (Izquierda) */
+.abilities-text-column {
+    flex: 1;
+    max-width: 500px;
+    text-align: left; /* Alineamos el texto a la izquierda */
+}
+
+.abilities-title {
+    font-size: 2.5em; /* Título más grande e impactante */
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    margin-bottom: 20px;
+    color: var(--riot-dark); /* Cambiado a color oscuro para el fondo naranja */
+    transform: skewX(-10deg); /* Inclinación del texto */
+}
+
+.abilities-description {
+    font-size: 1.1em;
+    color: var(--riot-dark); /* Cambiado a color oscuro */
+    line-height: 1.5;
+    margin-bottom: 30px;
+}
+
+/* Íconos de Habilidades */
+.ability-icons {
+    display: flex;
+    gap: 15px;
+    justify-content: flex-start; /* Alinea a la izquierda */
+}
+
+.ability-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid rgba(0, 0, 0, 0.3); /* Borde oscuro sobre fondo claro */
+    background-color: #222;
+    cursor: pointer;
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+/* Estilo para la imagen DENTRO del ícono de habilidad */
+.ability-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Asegura que la imagen cubra el círculo sin deformarse */
+    border-radius: 50%; /* Mantiene la forma circular de la imagen */
+}
+
+.ability-icon.active {
+    border-color: var(--riot-dark); /* Borde oscuro para el activo */
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); /* Sombra sutil */
+}
+
+.ability-icon:hover:not(.active) {
+    transform: translateY(-5px);
+    border-color: var(--riot-dark);
+}
+
+/* Colores placeholder para los íconos de Ahri (o similar) */
+.icon-q { background-image: url('https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/cb7488a2be8dbf42b041c5559510afcbb8761cc8-192x192.png?auto=format&fit=crop&q=80&h=120&w=120&crop=center'); }
+.icon-w { background-image: url('https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/00aff865b783ae49cb67a924b5cff0c44ef4c37c-192x192.png?auto=format&fit=crop&q=80&h=120&w=120&crop=center'); }
+.icon-e { background-image: url('https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/b36d85af7635597adb33dec8d06692ce6da5d88f-192x192.png?auto=format&fit=crop&q=80&h=120&w=120&crop=center'); }
+.icon-r { background-image: url('https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/0ebccd93545e4abdec567c8832c86f266902f03f-192x192.png?auto=format&fit=crop&q=80&h=120&w=120&crop=center'); }
+.icon-passive { background-image: url('https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/0295435bc167910d385c94f7322ac78439e38ffb-192x192.png?auto=format&fit=crop&q=80&h=120&w=120&crop=center'); }
+
+
+/* Columna de Imagen (Derecha) */
+.abilities-image-column {
+    flex: 1; /* Hacemos que la columna sea flexible */
+    max-width: 550px; /* Ajustamos el ancho */
+    display: flex;
+    flex-direction: column; /* Apilamos el video y el texto verticalmente */
+    align-items: flex-start; /* Alineamos a la izquierda */
+    text-align: left;
+}
+
+.gameplay-video {
+    width: 100%;
+    height: auto;
+    border-radius: 4px; /* Borde más sutil */
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    object-fit: cover; /* Asegura que el vídeo cubra el área sin deformarse */
+    background-color: #000; /* Fondo negro mientras carga el vídeo */
+}
+
+.ability-details-text {
+    margin-top: 20px;
+}
+
+.ability-detail-title {
+    font-size: 1.3em;
+    font-weight: 700;
+    color: var(--riot-dark);
+    margin-bottom: 10px;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.ability-detail-description {
+    font-size: 0.95em;
+    color: var(--riot-dark);
+    line-height: 1.4;
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* --- SECCIÓN POWER UP YOUR CHAMP --- */
+
+.power-up-section {
+    background-color: #f7931e; /* Fondo naranja, igual que la sección anterior */
+    color: var(--riot-dark); /* Cambiado a color oscuro */
+    padding: 60px 40px; /* Reducimos el padding superior para subir la sección */
+    overflow: hidden; /* Asegura que la imagen flotante se contenga */
+}
+
+.power-up-content-wrapper {
+    display: flex; /* Mantenemos flexbox */
+    justify-content: center; /* Centramos el contenido */
+    align-items: center; /* Centramos verticalmente las columnas */
+    gap: 60px;
+    margin: 0 auto;
+}
+
+/* Columna de Texto (Izquierda) */
+.power-up-text-column {
+    flex: 1;
+    max-width: 500px;
+    text-align: left; /* Alineamos el texto a la izquierda */
+    padding-top: 0; /* Reseteamos el padding */
+}
+
+.power-up-title {
+    font-size: 3em;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    margin-bottom: 40px;
+    color: var(--riot-dark); /* Cambiado a color oscuro */
+    transform: skewX(-10deg); /* Inclinación del texto */
+    text-align: left; /* Aseguramos que el título esté a la izquierda */
+}
+
+.power-up-icons {
+    display: flex;
+    gap: 30px;
+    justify-content: flex-start;
+}
+
+.power-up-item {
+    text-align: center;
+    transition: opacity 0.3s ease-in-out; /* Añadimos una transición para la opacidad */
+}
+
+.item-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.2); /* Fondo sutil para el ícono */
+    border: 3px solid rgba(255, 255, 255, 0.5);
+    margin-bottom: 10px;
+    background-size: 50%; /* Tamaño del icono dentro del círculo */
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.item-icon img {
+    width: 100%;
+    height: 138%;
+    object-fit: cover; /* Asegura que la imagen cubra el círculo */
+    border-radius: 50%; /* Mantiene la forma circular */
+}
+
+.item-icon:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-color: var(--text-light);
+}
+
+.power-up-item.active .item-icon {
+    background-color: rgba(255, 255, 255, 0.4);
+    border-color: var(--text-light);
+}
+
+/* Cuando se interactúa con los íconos, los que no están activos se vuelven opacos */
+.power-up-icons:hover .power-up-item:not(.active) {
+    opacity: 0.5;
+}
+
+
+/* Placeholders para los íconos (con emojis para demostración) */
+.icon-experience {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3em;
+    color: var(--text-light);
+    /* Mantener consistencia con otros iconos; puede usarse background-image si se reemplaza por una imagen real */
+}
+.icon-gold { 
+    content: '💰'; /* Emoji como placeholder */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3em;
+    color: var(--text-light);
+}
+.icon-items { 
+    content: '📦'; /* Emoji como placeholder */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3em;
+    color: var(--text-light);
+}
+
+
+.item-name {
+    font-size: 0.9em;
+    font-weight: 700;
+    color: var(--riot-dark); /* Cambiado a color oscuro */
+    letter-spacing: 0.05em;
+}
+
+/* Columna de Imagen (Derecha) */
+.power-up-image-column {
+    flex: 1;
+    max-width: 600px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra los hijos horizontalmente */
+}
+
+.champion-miss-fortune {
+    width: 600px; /* Ancho de la imagen */
+    height: 600px; /* Altura de la imagen */    
+    background-image: url('https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/902217ff8f02d18ef925412c8bf7d7d39c2181a0-1208x1208.png?auto=format&fit=fill&q=80&w=920'); /* Si tienes una imagen real */
+    background-size: contain; /* Contiene la imagen sin recortar */
+    background-repeat: no-repeat;
+    background-position: right center;
+    z-index: 1;
+    position: relative;
+}
+
+/* Efecto de halo brillante detrás de la imagen */
+.champion-miss-fortune::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 15%; /* Ajusta la posición del halo */
+    transform: translateY(-50%) scale(1.1); /* Escala ligeramente el halo */
+    width: 350px; /* Tamaño del halo */
+    height: 350px;
+    background-color: rgba(255, 255, 255, 0.2); /* Color del halo */
+    border-radius: 50%;
+    filter: blur(40px); /* Efecto de desenfoque */
+    z-index: -1; /* Detrás de la imagen */
+}
+
+.ability-detail-box {
+    padding: 30px; /* Más padding */
+    border-radius: 8px;    
+    text-align: center; /* Centramos el texto */
+    margin-top: -20px; /* Ajustamos el margen para que no se solape tanto */
+    z-index: 2;
+    width: 90%; /* Ancho relativo a la columna de la imagen */
+}
+
+.ability-detail-title {
+    font-size: 1.3em;
+    font-weight: 700;
+    margin-bottom: 10px;
+    transition: opacity 0.2s ease-in-out; /* Transición para el fade */
+}
+
+.ability-detail-description {
+    font-size: 0.95em;
+    line-height: 1.4;
+    transition: opacity 0.2s ease-in-out; /* Transición para el fade */
+}
+/* --- SECCIÓN PILARES DEL JUEGO (FREE TO PLAY) --- */
+
+.game-pillars-section {
+    position: relative;
+    background-color: var(--text-light); /* Fondo blanco */
+    color: var(--riot-dark);
+    padding: 80px 40px; /* Padding ajustado sin la decoración */
+    overflow: hidden;
+}
+
+.pillars-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.pillar-card {
+    flex: 1;
+    max-width: 380px;
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.pillar-card:hover {
+    transform: translateY(-5px);
+}
+
+.pillar-image {
+    width: 100%;
+    /* Alto de la imagen (aproximadamente cuadrado o vertical) */
+    height: 450px; 
+    background-size: cover;
+    background-position: center;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.pillar-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Asegura que la imagen cubra el espacio */
+    border-radius: 4px; /* Mantiene las esquinas redondeadas */
+}
+
+.image-modes {
+    /* Simula los íconos de rangos */
+    background: linear-gradient(to bottom, #1e3c72, #2a5298); 
+    /* Si tienes la imagen: background-image: url('rank-icons.jpg'); */
+}
+
+.image-rewards {
+    /* Simula la imagen de los poros con oro */
+    background: linear-gradient(to bottom right, #c0c0c0, #ffd700); 
+    /* Si tienes la imagen: background-image: url('poro-rewards.jpg'); */
+}
+
+.pillar-card h3 {
+    font-size: 1.1em;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    margin-top: 10px;
+    padding: 0 10px;
+}
+/* --- SECCIÓN DE VIDEO --- */
+
+.video-section {
+    background-color: var(--riot-dark); /* Fondo oscuro */
+    padding: 0; /* Eliminamos el padding para que el video ocupe todo */
+}
+
+.video-container {
+    max-width: none; /* El contenedor ocupa todo el ancho */
+    margin: 0 auto;
+}
+
+.gameplay-video {
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+    /* Eliminamos los estilos de borde y sombra */
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    /* Ajustamos la altura si es necesario, o dejamos que se ajuste al ancho */
+    height: auto; 
+    max-height: none;
+}
+/* --- PIE DE PÁGINA (FOOTER) --- */
+
+.main-footer {
+    background-color: #111111; /* Un color muy oscuro, casi negro */
+    color: var(--text-faded);
+    padding: 60px 40px;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.05); /* Línea divisoria muy sutil */
+}
+
+.footer-content-wrapper {
+    max-width: 800px; /* Ancho más estrecho para el contenido central */
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Íconos de Redes Sociales */
+.social-icons {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 40px; /* Más espacio debajo de los íconos */
+}
+
+.social-link-icon img {
+    width: 30px; /* Tamaño de los íconos */
+    height: 30px;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+}
+
+.social-link-icon img:hover {
+    opacity: 1;
+}
+
+/* Hacer el ícono de Facebook blanco */
+.social-link-icon img[src="img/facebook-brands-solid-full.svg"] {
+    filter: invert(1);
+}
+
+/* Hacer el ícono de Instagram blanco */
+.social-link-icon img[src="img/instagram-brands-solid-full.svg"] {
+    filter: invert(1);
+}
+
+/* Hacer el ícono de Twitter blanco */
+.social-link-icon img[src="img/x-twitter-brands-solid-full.svg"] {
+    filter: invert(1);
+}
+
+/* Hacer el ícono de YouTube blanco */
+.social-link-icon img[src="img/youtube-brands-solid-full.svg"] {
+    filter: invert(1);
+}
+
+/* Logo de Riot Games en el Footer */
+.riot-logo-footer img {
+    width: 120px; /* Tamaño del logo de Riot */
+    filter: invert(1) brightness(2.0); /* Lo convierte a blanco y luego lo oscurece a un gris más oscuro */
+    opacity: 1; /* Opacidad completa para un color sólido */
+    margin-bottom: 30px;
+    mix-blend-mode: screen; /* Vuelve a añadir el modo de mezcla para eliminar el fondo */
+}
+
+/* Texto de Derechos de Autor */
+.copyright-text {
+    font-size: 0.8em;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 40px;
+}
+
+/* Enlaces Legales */
+.footer-legal-links ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 30px; /* Espacio entre los enlaces */
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+
+.footer-legal-links a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-size: 0.85em;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    transition: color 0.3s;
+}
+
+.footer-legal-links a:hover {
+    color: var(--text-light);
+}
+
+/* Clasificación ESRB */
+.esrb-rating {
+    display: flex;
+    align-items: flex-start; /* Alinea los ítems a la parte superior */
+    background-color: #333333; /* Fondo oscuro del cuadro ESRB */
+    padding: 15px 20px;
+    border-radius: 4px;
+    gap: 15px;
+    margin-top: 20px; /* Espacio desde la sección anterior */
+}
+
+.esrb-rating img {
+    width: 50px; /* Tamaño del logo ESRB */
+    height: auto;
+}
+
+.rating-details {
+    text-align: left;
+    font-size: 0.8em;
+    line-height: 1.3;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.rating-details p {
+    margin: 0;
+    padding: 0;
+}
+
+.esrb-label {
+    font-weight: 700;
+    margin-top: 5px;
+    color: rgba(255, 255, 255, 0.8);
+}
+/* --- SECCIÓN DE CUADRÍCULA DE NOTICIAS --- */
+
+.news-grid-section {
+    background-color: var(--text-light); /* Fondo blanco para las tarjetas */
+    padding: 80px 100px; /* Padding amplio para centrar y espaciar */
+    color: var(--riot-dark);
+}
+
+.news-grid-container {
+    display: grid;
+    /* Cuadrícula de 3 columnas con espacio de 30px entre ellas */
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 30px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.news-card {
+    display: flex;
+    flex-direction: column;
+    /* Transición al pasar el mouse */
+    transition: transform 0.2s;
+    cursor: pointer;
+}
+
+.news-card:hover {
+    transform: translateY(-5px);
+}
+
+.card-image {
+    width: 100%;
+    /* Relación de aspecto común para imágenes de noticias (ej: 16:9) */
+    height: 200px; 
+    background-size: cover;
+    background-position: center;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Ícono de flecha para redirección en la esquina */
+.card-redirect-icon {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: var(--text-light);
+    border-radius: 0; /* Cambiado a cuadrado */
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.8em; /* Hacemos la flecha un poco más grande */
+    line-height: 1; /* Ajustamos la altura de línea para centrar mejor */
+}
+
+/* Estilo para la imagen dentro de la tarjeta */
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Asegura que la imagen cubra el contenedor */
+}
+
+/* Botón de "Play" superpuesto en el centro de la imagen */
+.play-button-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    background-color: rgba(0, 0, 0, 0.6);
+    border: 2px solid var(--text-light);
+    border-radius: 0; /* Cambiado a cuadrado */
+    color: var(--text-light);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+    line-height: 1;
+    padding-left: 5px; /* Ajuste para centrar visualmente el símbolo '▶' */
+    transition: background-color 0.2s, transform 0.2s;
+    z-index: 3;
+}
+
+/* Placeholders para las imágenes con colores temáticos */
+.image-patch-c { background: linear-gradient(to right, #20b2aa, #00ced1); } /* Turquesa/Azul de Nami */
+.image-patch-b { background: linear-gradient(to right, #4169e1, #191970); } /* Azul oscuro/morado */
+.image-patch-a { background: linear-gradient(to right, #808000, #556b2f); } /* Verde oscuro de Akali */
+.image-blog-group { background: linear-gradient(to right, #808080, #696969); } /* Gris/Marrón de la imagen de grupo */
+.image-nilah-art { background: linear-gradient(to right, #008080, #00bfff); } /* Azul claro/Teal de Nilah */
+.image-nilah-gameplay { background: linear-gradient(to right, #4682b4, #1e90ff); } /* Azul/Celeste de Nilah */
+
+
+.card-date {
+    font-size: 0.8em;
+    font-weight: 700;
+    color: #4a4a4a; /* Gris oscuro para las fechas */
+    margin-bottom: 5px;
+    letter-spacing: 0.05em;
+}
+
+.card-title {
+    font-size: 1.1em;
+    font-weight: 900;
+    margin-bottom: 5px;
+    line-height: 1.3;
+}
+
+.card-summary {
+    font-size: 0.9em;
+    color: #666;
+    line-height: 1.4;
+}
+/* --- PLACEHOLDERS ADICIONALES PARA LA SEGUNDA FILA --- */
+
+.image-patch-62-group { 
+    background: linear-gradient(to right, #8a2be2, #4b0082); /* Morado/Violeta */
+} 
+.image-patch-63-akali { 
+    background: linear-gradient(to right, #556b2f, #6b8e23); /* Verde oliva */
+} 
+.image-patch-63-preview { 
+    background: linear-gradient(to right, #00bfff, #007bff); /* Azul/Celeste (Staff) */
+}
+.image-wild-rounds { 
+    background: linear-gradient(to right, #f4a460, #a0522d); /* Marrón/Arena */
+}
+.image-patch-62k-mf { 
+    background: linear-gradient(to right, #ff4500, #dc143c); /* Naranja/Rojo de Miss Fortune */
+}
+.image-patch-621-group { 
+    background: linear-gradient(to right, #8a2be2, #4b0082); /* Morado/Violeta (Similar al 7) */
+}   
+/* --- PLACEHOLDERS ADICIONALES PARA LA TERCERA FILA --- */
+
+.image-patch-62i-group { 
+    background: linear-gradient(to right, #8a2be2, #4b0082); /* Morado/Violeta (Similar al 7) */
+}
+.image-patch-62h-swain { 
+    background: linear-gradient(to right, #8b0000, #b22222); /* Rojo oscuro/Swain */
+} 
+.image-velkoz-overview { 
+    background: linear-gradient(to right, #4b0082, #9400d3); /* Morado/Vel'Koz */
+}
+.image-patch-62g-velkoz { 
+    background: linear-gradient(to right, #4b0082, #9400d3); /* Morado/Vel'Koz (similar) */
+}
+.image-patch-62f-corki { 
+    background: linear-gradient(to right, #a0522d, #f4a460); /* Marrón/Naranja (Corki/Yordle) */
+}
+.image-patch-62e-viego { 
+    background: linear-gradient(to right, #008080, #2f4f4f); /* Verde azulado/Oscuro (Viego) */
+}
+
+/* Estilo para el enlace de la parte inferior */
+.news-footer-link {
+    grid-column: 1 / -1; /* Ocupa el ancho completo de la cuadrícula */
+    text-align: left;
+    margin-top: 20px;
+    font-size: 0.7em;
+    color: #999;
+}
+/* --- PLACEHOLDERS ADICIONALES PARA LA CUARTA FILA --- */
+
+.image-patch-62d-adventure { 
+    background: linear-gradient(to right, #8a2be2, #4b0082); /* Morado/Violeta */
+} 
+.image-bard-overview { 
+    background: linear-gradient(to right, #a0522d, #f4a460); /* Marrón/Naranja (Bard) */
+} 
+.image-patch-62c-twitch { 
+    background: linear-gradient(to right, #4b0082, #9400d3); /* Morado/Twitch */
+}
+.image-patch-62c-adventure-bottom { 
+    background: linear-gradient(to right, #8a2be2, #4b0082); /* Morado/Violeta (Similar al de arriba) */
+}
+.image-patch-62b-evelynn { 
+    background: linear-gradient(to right, #800080, #c71585); /* Magenta/Púrpura (Evelynn) */
+}
+.image-patch-62-july-report { 
+    background: linear-gradient(to right, #8a2be2, #4b0082); /* Morado/Violeta (Similar al 19) */
+}
+/* --- PLACEHOLDERS ADICIONALES PARA LA QUINTA FILA --- */
+
+.image-patch-62a-mfship { 
+    background: linear-gradient(to right, #b22222, #8b0000); /* Rojo oscuro/Miss Fortune */
+} 
+.image-worlds-2025 { 
+    background: linear-gradient(to right, #444444, #111111); /* Gris oscuro/Negro (Worlds) */
+} 
+.image-rift-report-21st { 
+    background: linear-gradient(to right, #00bfff, #1e90ff); /* Azul/Aurora */
+}
+.image-patch-62-bunny { 
+    background: linear-gradient(to right, #008080, #20b2aa); /* Teal/Verde azulado (Aurora) */
+}
+.image-aurora-overview { 
+    background: linear-gradient(to right, #ffb6c1, #ff69b4); /* Rosa/Magenta (Aurora) */
+}
+.image-patch-62-gameplay { 
+    background: linear-gradient(to right, #6a5acd, #483d8b); /* Morado/Púrpura */
+}
+/* --- PLACEHOLDERS ADICIONALES PARA LA SEXTA FILA --- */
+
+.image-behavior-system { 
+    background: linear-gradient(to right, #6a5acd, #483d8b); /* Morado/Púrpura */
+} 
+.image-soulforce-awakening { 
+    background: linear-gradient(to right, #ffd700, #daa520); /* Dorado/Marrón (Runas) */
+} 
+.image-patch-61f-evelynn { 
+    background: linear-gradient(to right, #008080, #20b2aa); /* Teal/Verde azulado */
+}
+
+/* --- ESTILOS DEL BOTÓN "SHOW MORE" --- */
+
+.show-more-container {
+    max-width: 1400px;
+    margin: 40px auto 0; /* Espacio superior */
+    padding: 0 100px; /* Alinea con el padding de la cuadrícula */
+    text-align: center;
+}
+
+.show-more-separator {
+    border: none;
+    border-top: 1px solid #e0e0e0; /* Línea gris muy clara */
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+}
+
+.show-more-button {
+    /* Estilo del texto del botón */
+    display: inline-block;
+    color: var(--riot-dark);
+    font-size: 0.9em;
+    font-weight: 900;
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    padding: 10px 20px;
+    margin-top: -20px; /* Mueve el botón hacia arriba para que se solape con la línea */
+    background-color: var(--text-light); /* Fondo blanco */
+    position: relative;
+    z-index: 5;
+    transition: color 0.2s;
+}
+
+.show-more-button span {
+    font-weight: 900;
+    font-size: 1.1em;
+    margin-left: 5px;
+}
+
+.show-more-button:hover {
+    color: var(--riot-blue); /* Color al pasar el ratón */
+}
